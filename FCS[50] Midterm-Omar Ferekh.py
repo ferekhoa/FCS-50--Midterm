@@ -17,6 +17,13 @@ class Browser:
         newTab = Tab(title, url)
         self.Tabs.append(newTab)
 
+    def CloseTab(self):
+        index = int(input("Please enter the index of the tab you wish to close: "))
+        if 0 <= index < len(self.Tabs):
+            self.Tabs.remove(self.Tabs[index])
+        else:
+            print("Invalid Index.")
+
 
 
 
@@ -39,8 +46,8 @@ def main():
 
         if choice == 1:
             System.OpenTab()
-        # elif choice == 2:
-        #     # close Tab
+        elif choice == 2:
+            System.CloseTab()
         # elif choice == 3:
         #     #Switch Tab
         # elif choice == 4:
