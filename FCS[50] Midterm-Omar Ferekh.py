@@ -1,17 +1,30 @@
 import requests
 from bs4 import BeautifulSoup  #intalled with the help of:https://stackoverflow.com/questions/35748239/failed-to-install-package-beautiful-soup-error-message-is-syntaxerror-missing
+import json
+
+
 class Tab:
     def __init__(self, title, url):
         self.title = title
         self.url = url
 
+# display function for title and url:
     def displayTabs(self):
         print(f",Contents of the Tab are: {self.title}, and  {self.url}")
 
+# To display the content of the url:
     def scrape_Tabs(self):  # from stack overflow https://stackoverflow.com/questions/68488306/how-do-i-scrape-data-from-urls-in-a-python-scraped-list-of-urls
         response = requests.get(self.url)
         soup = BeautifulSoup(response.text, 'html.parser')
         print(f"Content of {self.title}: {soup.title.text}")
+
+# Json display format
+    def Json(self):
+        return{
+            'title': self.title,
+            'url': self.url,
+        }
+
 
 class Browser:
     def __init__(self):
@@ -45,6 +58,13 @@ class Browser:
         else:
             self.Tabs[-1].scrape_Tabs()
 
+    def SaveTabs(self):
+        filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
+        with open(filePath, 'w') as file:
+            tabs_Json = [tab.Json() for tab in self.Tabs]
+            json.dump(tabs_Json, file)  # https://www.geeksforgeeks.org/append-to-json-file-using-python/
+        print("Tabs successfully added.")
+
 
 def main():
 
@@ -75,8 +95,8 @@ def main():
         #     #Open Nested Tab
         # elif choice == 6:
         #     #Sort All tabs
-        # elif choice == 7:
-        #     #save Tabs
+        elif choice == 7:
+            System.SaveTabs()
         # elif choice == 8:
         #     #Import Tabs
         elif choice == 9:
