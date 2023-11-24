@@ -1,3 +1,5 @@
+import requests
+from bs4 import BeautifulSoup  #intalled with the help of:https://stackoverflow.com/questions/35748239/failed-to-install-package-beautiful-soup-error-message-is-syntaxerror-missing
 class Tab:
     def __init__(self, title, url):
         self.title = title
@@ -6,6 +8,10 @@ class Tab:
     def displayTabs(self):
         print(f",Contents of the Tab are: {self.title}, and  {self.url}")
 
+    def scrape_Tabs(self):  # from stack overflow https://stackoverflow.com/questions/68488306/how-do-i-scrape-data-from-urls-in-a-python-scraped-list-of-urls
+        response = requests.get(self.url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        print(f"Content of {self.title}: {soup.title.text}")
 
 class Browser:
     def __init__(self):
@@ -33,11 +39,11 @@ class Browser:
         if userInput:
             index = int(userInput)
             if 0 <= index < len(self.Tabs):
-                self.Tabs[index].displayTabs()
+                self.Tabs[index].scrape_Tabs()
             else:
                 print("Invalid Index.")
         else:
-            self.Tabs[-1].displayTabs()
+            self.Tabs[-1].scrape_Tabs()
 
 
 def main():
