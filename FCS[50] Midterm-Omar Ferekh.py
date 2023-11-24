@@ -1,5 +1,28 @@
+class Tab:
+    def __init__(self, title, url):
+        self.title = title
+        self.url = url
+
+    def displayTabs(self):
+        print(f",Contents of the Tab are: {self.title}, and  {self.url}")
+
+
+class Browser:
+    def __init__(self):
+        self.Tabs = []
+
+    def OpenTab(self):
+        title = input("Please enter the title for your Tab: ")
+        url = input("Please enter the url of your Tab: ")
+        newTab = Tab(title, url)
+        self.Tabs.append(newTab)
+
+
+
+
 def main():
 
+    System = Browser()
     while True:
         print("Welcome to the Browser")
         print("1. Open Tab")
@@ -15,21 +38,21 @@ def main():
         choice = int(input("Enter your choice: "))
 
         if choice == 1:
-            # Open Tab
-        elif choice == 2:
-            # close Tab
-        elif choice == 3:
-            #Switch Tab
-        elif choice == 4:
-            #Display All Tabs
-        elif choice == 5:
-            #Open Nested Tab
-        elif choice == 6:
-            #Sort All tabs
-        elif choice == 7:
-            #save Tabs
-        elif choice == 8:
-            #Import Tabs
+            System.OpenTab()
+        # elif choice == 2:
+        #     # close Tab
+        # elif choice == 3:
+        #     #Switch Tab
+        # elif choice == 4:
+        #     #Display All Tabs
+        # elif choice == 5:
+        #     #Open Nested Tab
+        # elif choice == 6:
+        #     #Sort All tabs
+        # elif choice == 7:
+        #     #save Tabs
+        # elif choice == 8:
+        #     #Import Tabs
         elif choice == 9:
             print("The program is closing...")
             break
