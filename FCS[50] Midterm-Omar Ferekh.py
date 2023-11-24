@@ -18,7 +18,7 @@ class Browser:
         self.Tabs.append(newTab)
 
     def CloseTab(self):
-        userInput = input("Please enter the index of the tab you wish to close: ")
+        userInput = input("Please enter the index of the tab you wish to close or enter to close the last Tab: ")
         if userInput:
             index = int(userInput)
             if 0 <= index < len(self.Tabs):
@@ -28,7 +28,16 @@ class Browser:
         else:
             self.Tabs.pop()
 
-
+    def SwitchTab(self):
+        userInput = input("Please enter the index of the Tab you wish to preview its content or enter to show the content of the last Tab: ")
+        if userInput:
+            index = int(userInput)
+            if 0 <= index < len(self.Tabs):
+                self.Tabs[index].displayTabs()
+            else:
+                print("Invalid Index.")
+        else:
+            self.Tabs[-1].displayTabs()
 
 
 def main():
@@ -52,8 +61,8 @@ def main():
             System.OpenTab()
         elif choice == 2:
             System.CloseTab()
-        # elif choice == 3:
-        #     #Switch Tab
+        elif choice == 3:
+            System.SwitchTab()
         # elif choice == 4:
         #     #Display All Tabs
         # elif choice == 5:
