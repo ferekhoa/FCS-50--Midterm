@@ -65,6 +65,13 @@ class Browser:
             json.dump(tabs_Json, file)  # https://www.geeksforgeeks.org/append-to-json-file-using-python/
         print("Tabs successfully added.")
 
+    def ImportTabs(self):
+        filePath = input("Please enter the file path to import files from: ").strip('\"')
+        with open(filePath, 'r') as file:
+            self.Tabs = json.load(file)
+        print(f"Tabs data imported from {filePath}")
+
+
 
 def main():
 
@@ -97,8 +104,8 @@ def main():
         #     #Sort All tabs
         elif choice == 7:
             System.SaveTabs()
-        # elif choice == 8:
-        #     #Import Tabs
+        elif choice == 8:
+            System.ImportTabs()
         elif choice == 9:
             print("The program is closing...")
             break
