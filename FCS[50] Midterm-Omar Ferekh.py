@@ -18,11 +18,15 @@ class Browser:
         self.Tabs.append(newTab)
 
     def CloseTab(self):
-        index = int(input("Please enter the index of the tab you wish to close: "))
-        if 0 <= index < len(self.Tabs):
-            self.Tabs.remove(self.Tabs[index])
+        userInput = input("Please enter the index of the tab you wish to close: ")
+        if userInput:
+            index = int(userInput)
+            if 0 <= index < len(self.Tabs):
+                self.Tabs.remove(self.Tabs[index])
+            else:
+                print("Invalid Index.")
         else:
-            print("Invalid Index.")
+            self.Tabs.pop()
 
 
 
