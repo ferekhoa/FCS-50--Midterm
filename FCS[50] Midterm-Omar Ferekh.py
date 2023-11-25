@@ -4,9 +4,10 @@ import json
 
 
 class Tab:
-    def __init__(self, title, url):
+    def __init__(self, title, url, nestedTabs):
         self.title = title
         self.url = url
+        self.nestedTabs = nestedTabs
 
 # display function for title and url:
     def displayTabs(self):
@@ -23,6 +24,7 @@ class Tab:
         return{
             'title': self.title,
             'url': self.url,
+            'nestedTabs': [tab.Json() for tab in self.nestedTabs]
         }
 
 
@@ -116,8 +118,8 @@ def main():
             System.SwitchTab()
         elif choice == 4:
             System.DisplayAllTabs()
-        # elif choice == 5:
-        #     #Open Nested Tab
+        elif choice == 5:
+            System.OpenNestedTabs()
         # elif choice == 6:
         #     #Sort All tabs
         elif choice == 7:
