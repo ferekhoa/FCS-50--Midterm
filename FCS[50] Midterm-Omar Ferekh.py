@@ -59,8 +59,12 @@ class Browser:
             self.Tabs[-1].scrape_Tabs()
 
     def DisplayAllTabs(self):
-        tab_json = [tab.Json() for tab in self.Tabs]
-        print(json.dumps(tab_json))
+        if not self.Tabs:
+            print("There are no tabs in the dictionary.")
+        else:
+            print("Titles of Tabs are:")
+            for tab in self.Tabs:
+                print(tab.title)
 
     def SaveTabs(self):
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
