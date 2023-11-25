@@ -72,7 +72,6 @@ class Browser:
         print(f"Tabs data imported from {filePath}")
 
 
-
 def main():
 
     System = Browser()
