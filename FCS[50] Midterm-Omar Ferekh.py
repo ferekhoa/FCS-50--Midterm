@@ -58,6 +58,10 @@ class Browser:
         else:
             self.Tabs[-1].scrape_Tabs()
 
+    def DisplayAllTabs(self):
+        for i, tab in enumerate(self.Tabs):
+            print(f"{tab.title} {tab.url}")
+
     def SaveTabs(self):
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
         with open(filePath, 'w') as file:
@@ -95,8 +99,8 @@ def main():
             System.CloseTab()
         elif choice == 3:
             System.SwitchTab()
-        # elif choice == 4:
-        #     #Display All Tabs
+        elif choice == 4:
+            System.DisplayAllTabs()
         # elif choice == 5:
         #     #Open Nested Tab
         # elif choice == 6:
