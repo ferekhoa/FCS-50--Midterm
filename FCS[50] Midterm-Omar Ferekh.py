@@ -66,6 +66,17 @@ class Browser:
             for tab in self.Tabs:
                 print(tab.title)
 
+    def OpenNestedTabs(self):
+        userInput = int(input("Please enter the index of the Tab you wish to add a nested Tab to it: "))
+        if 0 <= userInput < len(self.Tabs):
+            parentTab = self.Tabs[userInput]
+            title = input("Please enter the title for your Nested Tab: ")
+            url = input("Please enter the url of your Nested Tab: ")
+            newTab = Tab(title, url)
+            parentTab.nestedTabs.append(newTab)
+        else:
+            print("Invalid index of the Parent Tab.")
+
     def SaveTabs(self):
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
         with open(filePath, 'w') as file:
