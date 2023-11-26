@@ -76,12 +76,12 @@ class Browser:
             print("Titles of Tabs are:")
             self.DisplayAllTabsRecursively(tabs, level)
 
-    def DisplayAllTabsRecursively(self, tabs, level): # https://stackoverflow.com/questions/52625673/recursive-method-to-print-the-hierarchical-dictionary
+    def DisplayAllTabsRecursively(self, tabs, level): # O(n) where n is the number of tabs and nested tabs # https://stackoverflow.com/questions/52625673/recursive-method-to-print-the-hierarchical-dictionary
         for tab in tabs:
             print(" " * level + "-" + tab.title)
             self.DisplayAllTabsRecursively(tab.nestedTabs, level + 2)
 
-    def DisplayAllTabsHERIECALLY(self, tabs=None, level=0):
+    def DisplayAllTabsHERIECALLY(self, tabs=None, level=0): # O(n) where n is the number of tabs and nested tabs.
         if tabs is None:
             tabs = self.Tabs
         if not tabs:
@@ -126,7 +126,7 @@ class Browser:
         new_list.extend(right[ind2:])
         return new_list
 
-    def SortTabsRecursively(self, tab):
+    def SortTabsRecursively(self, tab): # O(nlog(n)) where n is the number of tabs since it is will use the merge function.
         tab.nestedTabs = self.mergeTabs(tab.nestedTabs)
         for nestedTab in tab.nestedTabs:
             self.SortTabsRecursively(nestedTab)
