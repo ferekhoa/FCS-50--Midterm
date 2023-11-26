@@ -100,15 +100,15 @@ class Browser:
         mid = len(tabs)//2
         left = tabs[:mid]
         right = tabs[mid:]
-        self.mergeTabs(left)
-        self.mergeTabs(right)
-        self.merge(left, right)
+        left = self.mergeTabs(left)
+        right = self.mergeTabs(right)
+        return self.merge(left, right)
 
     def merge(self, left, right):
         new_list = []
         ind1 = 0
         ind2 = 0
-        while ind1 <= len(left) and ind2 <= len(right):
+        while ind1 < len(left) and ind2 < len(right):
             if left[ind1].title < right[ind2].title:
                 new_list.append(left[ind1])
                 ind1 += 1
@@ -116,11 +116,16 @@ class Browser:
                 new_list.append(right[ind2])
                 ind2 += 1
 
+        new_list.extend(left[ind1])
+        new_list.extend(right[ind2])
+        new_list[ind1:ind2] = new_list
         return new_list
 
     def SortTabs(self):
         self.Tabs = self.mergeTabs(self.Tabs)
-        print("The Tabs are sorted Successfully")
+        print(f"The Tabs are sorted Successfully")
+        for tab in self.Tabs:
+            print(json.dumps(tab.Json(), indent=2))
 
     def SaveTabs(self):
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
