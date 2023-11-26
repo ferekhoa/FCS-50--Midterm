@@ -94,6 +94,34 @@ class Browser:
         else:
             print("Invalid index of the Parent Tab.")
 
+    def mergeTabs(self, tabs):
+        if len(tabs) <= 1:
+            return tabs
+        mid = len(tabs)//2
+        left = tabs[:mid]
+        right = tabs[mid:]
+        self.mergeTabs(left)
+        self.mergeTabs(right)
+        self.merge(left, right)
+
+    def merge(self, left, right):
+        new_list = []
+        ind1 = 0
+        ind2 = 0
+        while ind1 <= len(left) and ind2 <= len(right):
+            if left[ind1].title < right[ind2].title:
+                new_list.append(left[ind1])
+                ind1 += 1
+            else:
+                new_list.append(right[ind2])
+                ind2 += 1
+
+        return new_list
+
+    def SortTabs(self):
+        self.Tabs = self.mergeTabs(self.Tabs)
+        print("The Tabs are sorted Successfully")
+
     def SaveTabs(self):
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
         with open(filePath, 'w') as file:
@@ -135,8 +163,8 @@ def main():
             System.DisplayAllTabsHERIECALLY()
         elif choice == 5:
             System.OpenNestedTabs()
-        # elif choice == 6:
-        #     #Sort All tabs
+        elif choice == 6:
+            System.SortTabs()
         elif choice == 7:
             System.SaveTabs()
         elif choice == 8:
