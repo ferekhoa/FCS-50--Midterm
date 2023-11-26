@@ -73,7 +73,7 @@ class Browser:
     def DisplayAllTabsRecursively(self, tabs, level): # https://stackoverflow.com/questions/52625673/recursive-method-to-print-the-hierarchical-dictionary
         for tab in tabs:
             print(" " * level + "-" + tab.title)
-            self.DisplayAllTabsRecursively(tab.nestedTabs, level + 3)
+            self.DisplayAllTabsRecursively(tab.nestedTabs, level + 2)
 
     def DisplayAllTabsHERIECALLY(self, tabs=None, level=0):
         if tabs is None:
@@ -115,10 +115,9 @@ class Browser:
             else:
                 new_list.append(right[ind2])
                 ind2 += 1
-
-        new_list.extend(left[ind1])
-        new_list.extend(right[ind2])
-        new_list[ind1:ind2] = new_list
+        # https://stackoverflow.com/questions/46860219/how-do-i-make-a-merge-sort-built-for-a-single-list-sort-a-list-of-list-inste
+        new_list.extend(left[ind1:])
+        new_list.extend(right[ind2:])
         return new_list
 
     def SortTabs(self):
