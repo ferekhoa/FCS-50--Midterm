@@ -144,10 +144,11 @@ class Browser:
                 if not fileContent:
                     print(f"The file at path {filePath} is empty.")
                     return
-                self.Tabs = json.loads(fileContent)
+                tabs_data = json.loads(fileContent)
+                self.Tabs = [Tab(tab_data['title'], tab_data['url'], [Tab(**nested) for nested in tab_data['nestedTabs']]) for tab_data in tabs_data]
                 print(f"Tabs data imported from {filePath}")
                 for tab in self.Tabs:
-                    print(json.dumps(tab, indent=2))
+                    print(json.dumps(tab.Json(), indent=2))
         except FileNotFoundError:
             print("File not found.")
 
