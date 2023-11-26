@@ -16,8 +16,11 @@ class Tab:
 # To display the content of the url:
     def scrape_Tabs(self):  # from stack overflow https://stackoverflow.com/questions/68488306/how-do-i-scrape-data-from-urls-in-a-python-scraped-list-of-urls
         response = requests.get(self.url)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        print(f"Content of {self.title}: {soup.title.text}")
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            print(f"Content of {self.title}: {soup.prettify()}") # https://stackoverflow.com/questions/65780442/scraping-tables-from-a-webpage-into-python
+        else:
+            print("Failed to retrieve content.")
 
 # Json display format
     def Json(self):
