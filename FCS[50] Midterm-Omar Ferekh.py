@@ -10,7 +10,7 @@ class Tab:
         self.nestedTabs = nestedTabs if nestedTabs else []
 
 # display function for title and url:
-    def displayTabs(self):
+    def displayTabs(self): # O(1) 
         print(f",Contents of the Tab are: {self.title}, and  {self.url}")
 
 # To display the content of the url:
