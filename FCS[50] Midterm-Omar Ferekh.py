@@ -126,8 +126,15 @@ class Browser:
         new_list.extend(right[ind2:])
         return new_list
 
+    def SortTabsRecursively(self, tab):
+        tab.nestedTabs = self.mergeTabs(tab.nestedTabs)
+        for nestedTab in tab.nestedTabs:
+            self.SortTabsRecursively(nestedTab)
+
     def SortTabs(self):
         self.Tabs = self.mergeTabs(self.Tabs)
+        for tab in self.Tabs:
+            self.SortTabsRecursively(tab)
         print(f"The Tabs are sorted Successfully")
         for tab in self.Tabs:
             print(json.dumps(tab.Json(), indent=2))
