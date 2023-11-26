@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup  #intalled with the help of:https://stackoverflow.com/questions/35748239/failed-to-install-package-beautiful-soup-error-message-is-syntaxerror-missing
+from bs4 import BeautifulSoup  #installed with the help of:https://stackoverflow.com/questions/35748239/failed-to-install-package-beautiful-soup-error-message-is-syntaxerror-missing
 import json
 
 
@@ -135,9 +135,18 @@ class Browser:
 
     def ImportTabs(self):
         filePath = input("Please enter the file path to import files from: ").strip('\"')
-        with open(filePath, 'r') as file:
-            self.Tabs = json.load(file)
-        print(f"Tabs data imported from {filePath}")
+        try:
+            with open(filePath, 'r') as file:
+                fileContent = file.read()
+                if not fileContent:
+                    print(f"The file at path {filePath} is empty.")
+                    return
+                self.Tabs = json.loads(fileContent)
+                print(f"Tabs data imported from {filePath}")
+                for tab in self.Tabs:
+                    print(json.dumps(tab, indent=2))
+        except FileNotFoundError:
+            print("File not found.")
 
 
 def main():
