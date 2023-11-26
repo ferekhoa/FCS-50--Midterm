@@ -4,10 +4,10 @@ import json
 
 
 class Tab:
-    def __init__(self, title, url, nestedTabs):
+    def __init__(self, title, url, nestedTabs=None):
         self.title = title
         self.url = url
-        self.nestedTabs = nestedTabs
+        self.nestedTabs = nestedTabs if nestedTabs else []
 
 # display function for title and url:
     def displayTabs(self):
