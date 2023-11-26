@@ -60,13 +60,28 @@ class Browser:
         else:
             self.Tabs[-1].scrape_Tabs()
 
-    def DisplayAllTabs(self):
-        if not self.Tabs:
+    def DisplayAllTabs(self, tabs=None, level=0):
+        if tabs is None:
+            tabs = self.Tabs
+
+        if not tabs:
             print("There are no tabs in the dictionary.")
         else:
             print("Titles of Tabs are:")
-            for tab in self.Tabs:
-                print(tab.title)
+            self.DisplayAllTabsRecursively(tabs, level)
+
+    def DisplayAllTabsRecursively(self, tabs, level): # https://stackoverflow.com/questions/52625673/recursive-method-to-print-the-hierarchical-dictionary
+        for tab in tabs:
+            print(" " * level + "-" + tab.title)
+            self.DisplayAllTabsRecursively(tab.nestedTabs, level + 3)
+
+    def DisplayAllTabsHERIECALLY(self, tabs=None, level=0):
+        if tabs is None:
+            tabs = self.Tabs
+        if not tabs:
+            print("There are no tabs in the dictionary")
+        else:
+            self.DisplayAllTabsRecursively(tabs, level)
 
     def OpenNestedTabs(self):
         userInput = int(input("Please enter the index of the Tab you wish to add a nested Tab to it: "))
@@ -117,7 +132,7 @@ def main():
         elif choice == 3:
             System.SwitchTab()
         elif choice == 4:
-            System.DisplayAllTabs()
+            System.DisplayAllTabsHERIECALLY()
         elif choice == 5:
             System.OpenNestedTabs()
         # elif choice == 6:
