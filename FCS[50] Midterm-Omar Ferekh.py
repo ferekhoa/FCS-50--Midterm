@@ -66,7 +66,7 @@ class Browser:
         else:
             self.Tabs[-1].scrape_Tabs()
 
-    def DisplayAllTabs(self, tabs=None, level=0):
+    def DisplayAllTabs(self, tabs=None, level=0): # O(n) where n is the number of tabs.
         if tabs is None:
             tabs = self.Tabs
 
@@ -89,7 +89,7 @@ class Browser:
         else:
             self.DisplayAllTabsRecursively(tabs, level)
 
-    def OpenNestedTabs(self):
+    def OpenNestedTabs(self): # O(1) since we are choosing an index.
         userInput = int(input("Please enter the index of the Tab you wish to add a nested Tab to it: "))
         if 0 <= userInput < len(self.Tabs):
             parentTab = self.Tabs[userInput]
@@ -100,7 +100,7 @@ class Browser:
         else:
             print("Invalid index of the Parent Tab.")
 
-    def mergeTabs(self, tabs):
+    def mergeTabs(self, tabs): # O(nlog(n)) where n is the number of tabs and log is because we are dividing the list into 2 every time.
         if len(tabs) <= 1:
             return tabs
         mid = len(tabs)//2
@@ -131,7 +131,7 @@ class Browser:
         for nestedTab in tab.nestedTabs:
             self.SortTabsRecursively(nestedTab)
 
-    def SortTabs(self):
+    def SortTabs(self): # O(nlog(n)) where n is the number of tabs (same as the merge function)
         self.Tabs = self.mergeTabs(self.Tabs)
         for tab in self.Tabs:
             self.SortTabsRecursively(tab)
@@ -139,14 +139,14 @@ class Browser:
         for tab in self.Tabs:
             print(json.dumps(tab.Json(), indent=2))
 
-    def SaveTabs(self):
+    def SaveTabs(self): # O(n) where n is the number of tabs because it will go in every tab and change it to JSON format.
         filePath = input("Please enter the file path to save Tabs: ").strip('\"') # input("Please enter the file path to save Tabs: ".strip('\"'))   https://stackoverflow.com/questions/76412991/selective-data-saving-to-a-file-in-python
         with open(filePath, 'w') as file:
             tabs_Json = [tab.Json() for tab in self.Tabs]
             json.dump(tabs_Json, file)  # https://www.geeksforgeeks.org/append-to-json-file-using-python/
         print("Tabs successfully added.")
 
-    def ImportTabs(self):
+    def ImportTabs(self): # O(n) where n is the number of tabs because it will go through all the tabs to import them.
         filePath = input("Please enter the file path to import files from: ").strip('\"')
         try:
             with open(filePath, 'r') as file:
