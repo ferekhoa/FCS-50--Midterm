@@ -43,14 +43,14 @@ class Browser:
         if userInput:
             index = int(userInput)
             if 0 <= index < len(self.Tabs):
-                self.Tabs.remove(self.Tabs[index])
-                print(f"The tab {self.Tabs[index]} has ben closed")
+                closed_tab = self.Tabs.pop(index)
+                print(f"The tab with title '{closed_tab.title}' has ben closed")
 
             else:
                 print("Invalid Index.")
         else:
-            self.Tabs.pop()
-            print(f"The tab {self.Tabs[-1]} has ben closed")
+            closed_tab = self.Tabs.pop()
+            print(f"The tab with title '{closed_tab.title}' has ben closed")
 
     def SwitchTab(self):
         userInput = input("Please enter the index of the Tab you wish to preview its content or enter to show the content of the last Tab: ")
