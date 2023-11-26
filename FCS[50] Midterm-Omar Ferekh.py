@@ -23,7 +23,7 @@ class Tab:
             print("Failed to retrieve content.")
 
 # Json display format
-    def Json(self):
+    def Json(self): # O(n) where n is the number of tabs and nested tabs
         return{
             'title': self.title,
             'url': self.url,
@@ -35,13 +35,13 @@ class Browser:
     def __init__(self):
         self.Tabs = []
 
-    def OpenTab(self):
+    def OpenTab(self): # O(1)
         title = input("Please enter the title for your Tab: ")
         url = input("Please enter the url of your Tab: ")
         newTab = Tab(title, url)
         self.Tabs.append(newTab)
 
-    def CloseTab(self):
+    def CloseTab(self): # O(n) where n is the length of the tabs list as the worst case scenario.
         userInput = input("Please enter the index of the tab you wish to close or enter to close the last Tab: ")
         if userInput:
             index = int(userInput)
@@ -55,7 +55,7 @@ class Browser:
             closed_tab = self.Tabs.pop()
             print(f"The tab with title '{closed_tab.title}' has ben closed")
 
-    def SwitchTab(self):
+    def SwitchTab(self): # O(n) where n is the length of the tabs list as the worst case scenario.
         userInput = input("Please enter the index of the Tab you wish to preview its content or enter to show the content of the last Tab: ")
         if userInput:
             index = int(userInput)
